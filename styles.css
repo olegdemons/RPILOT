@@ -38,6 +38,7 @@ html[data-accent="orange"] { --accent: #e8a454; --accent-rgb: 232, 164, 84; }
 html[data-accent="purple"] { --accent: #b18be8; --accent-rgb: 177, 139, 232; }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;

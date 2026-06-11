@@ -1038,12 +1038,29 @@ function bindEvents() {
     event.preventDefault();
     const staticId = formatStaticId($("#login-static").value);
     if (cloud) {
-      const { error } = await cloud.auth.signInWithPassword({
-        email: staticEmail(staticId),
-        password: $("#login-password").value
-      });
+      const submitButton = $("#login-form button[type='submit']");
+      submitButton.disabled = true;
+      submitButton.textContent = "Входим...";
+      let error;
+      try {
+        ({ error } = await cloud.auth.signInWithPassword({
+          email: staticEmail(staticId),
+          password: $("#login-password").value
+        }));
+      } catch {
+        error = { message: "Нет связи с облачной базой. Проверьте интернет и повторите попытку." };
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Войти в аккаунт";
+      }
       if (error) {
-        showToast("Не удалось войти", "Проверьте статик и пароль");
+        const invalidCredentials = /invalid login credentials/i.test(error.message);
+        showToast(
+          invalidCredentials ? "Облачный аккаунт не найден" : "Не удалось войти",
+          invalidCredentials
+            ? "Откройте «Регистрация» и создайте аккаунт в новой базе один раз"
+            : error.message
+        );
         return;
       }
       try {
