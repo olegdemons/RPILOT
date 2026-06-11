@@ -128,7 +128,7 @@ const tenCodes = [
 const OWNER_STATIC = "946-447";
 const OWNER_FIRST_NAME = "Дмитрий";
 const OWNER_LAST_NAME = "Смирнов";
-const SUPABASE_URL = "https://rlcdhzigmnmsmgjngqxg.supabase.co";
+const SUPABASE_URL = "https://rlcdhzignmmsmgjngqxg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_We_-wlFl2FHokpyk_IHrwg_K6fzudz6";
 const cloud = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
