@@ -829,6 +829,16 @@ html[data-theme="light"] .modal { background: rgba(255,255,255,.8); }
   transition: .22s;
 }
 .auth-tabs button.active { color: #10130e; background: var(--accent); box-shadow: 0 8px 20px rgba(var(--accent-rgb),.22); }
+.auth-message {
+  margin-bottom: 15px;
+  padding: 12px 14px;
+  color: #ffb1aa;
+  border: 1px solid rgba(229,109,98,.4);
+  border-radius: 14px;
+  background: rgba(229,109,98,.1);
+  font-size: 12px;
+  line-height: 1.5;
+}
 .logout-button {
   width: 100%;
   min-height: 43px;

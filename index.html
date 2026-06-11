@@ -395,11 +395,13 @@
         <div class="account-session__details" id="session-account-details"></div>
       </div>
       <form id="login-form">
+        <div class="auth-message" id="login-message" hidden></div>
         <label class="field"><span>Статик ID</span><input id="login-static" required inputmode="numeric" maxlength="7" placeholder="946-447"></label>
         <label class="field"><span>Пароль</span><input id="login-password" type="password" required minlength="6" placeholder="Ваш пароль"></label>
         <button class="primary-button" type="submit">Войти в аккаунт</button>
       </form>
       <form id="profile-form">
+        <div class="auth-message" id="register-message" hidden></div>
         <div class="field-row">
           <label class="field"><span>Имя</span><input id="first-name" required maxlength="24" placeholder="Иван"></label>
           <label class="field"><span>Фамилия</span><input id="last-name" required maxlength="24" placeholder="Смирнов"></label>

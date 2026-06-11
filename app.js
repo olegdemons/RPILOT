@@ -783,6 +783,12 @@ function showAuthMode(mode) {
   $("#show-register").classList.toggle("active", !login);
 }
 
+function showAuthMessage(id, message = "") {
+  const element = $(`#${id}`);
+  element.textContent = message;
+  element.hidden = !message;
+}
+
 function renderGuide() {
   const post = posts[state.postId];
   $("#guide-image").src = post.image;
@@ -1036,6 +1042,7 @@ function bindEvents() {
 
   $("#login-form").addEventListener("submit", async (event) => {
     event.preventDefault();
+    showAuthMessage("login-message");
     const staticId = formatStaticId($("#login-static").value);
     if (cloud) {
       const submitButton = $("#login-form button[type='submit']");
@@ -1061,6 +1068,9 @@ function bindEvents() {
             ? "Откройте «Регистрация» и создайте аккаунт в новой базе один раз"
             : error.message
         );
+        showAuthMessage("login-message", invalidCredentials
+          ? "Аккаунт не найден в новой облачной базе. Если вы уже нажимали регистрацию, выполните восстановительный SQL."
+          : error.message);
         return;
       }
       try {
@@ -1094,6 +1104,7 @@ function bindEvents() {
 
   $("#profile-form").addEventListener("submit", async (event) => {
     event.preventDefault();
+    showAuthMessage("register-message");
     const password = $("#password").value;
     const confirmation = $("#password-confirm").value;
     const staticId = formatStaticId($("#static-id").value);
@@ -1129,6 +1140,7 @@ function bindEvents() {
       if (error) {
         const duplicate = /already|registered|duplicate|database/i.test(error.message);
         showToast(duplicate ? "Статик уже зарегистрирован" : "Ошибка регистрации", duplicate ? "Войдите в существующий аккаунт" : error.message);
+        showAuthMessage("register-message", `${duplicate ? "Аккаунт уже существует или был создан не полностью." : "Supabase отклонил регистрацию."} ${error.message}`);
         return;
       }
       if (!data.session) {
